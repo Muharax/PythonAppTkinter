@@ -22,24 +22,37 @@ def submit():
     name = name_var.get()
     password = passw_var.get()
 
-    print("The name is : " + name)
-    print("The password is : " + password)
-    if name=='1' and password=='1':
-        window.destroy()
-        new_window()
-    else:
-        name_var.set("")
-        passw_var.set("")
+    lines = open("login.txt", "r")
+    for i in lines:
+        a,b = i.split(",")
+        b = b.strip()
+        if name == a and password == b:
+            window.destroy()
+            new_window()
+        else:
+            name_var.set("")
+            passw_var.set("")
+
 
 def new_window():
     app = tk.Tk()
     app.title('Hasbolah')
-    app.resizable(False, False)
+    app.resizable(True, True)
     mid(app)
     icon(app)
-    btn_1 = tk.Button(app, text='Settings', width=7, height=1, relief=GROOVE)
+    fra = Frame(app, width=160, height=170, bg="yellow")
+    fra.place(x=10,y=10)
+    btn_1 = tk.Button(app, command=settings, text='Settings', width=7, height=1, relief=GROOVE)
     btn_1.place(x=238,y=3)
+
     app.mainloop()
+
+def settings():
+    lab = tk.Label(fra, text="HELLO")
+    lab.pack()
+    lab.grid(row="0", column="0")
+
+
 
 
 window = tk.Tk()
@@ -58,7 +71,7 @@ name_label = tk.Label(frame, text='Username', font=('monospace', 10, 'bold'))
 name_entry = tk.Entry(frame, textvariable=name_var, font=('calibre', 10, 'normal'))
 passw_label = tk.Label(frame, text='Password', font=('calibre', 10, 'bold'))
 passw_entry = tk.Entry(frame, textvariable=passw_var, font=('calibre', 10, 'normal'), show='*')
-sub_btn = tk.Button(frame, text='Submit', command=submit)
+sub_btn = tk.Button(frame, text='Submit', command=submit, width=20)
 
 # name_entry.focus()
 name_entry.insert(END, '1')

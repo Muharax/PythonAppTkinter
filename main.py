@@ -35,25 +35,34 @@ def submit():
 
 
 def new_window():
+    global app
     app = tk.Tk()
     app.title('Hasbolah')
     app.resizable(True, True)
     mid(app)
     icon(app)
-    fra = Frame(app, width=160, height=170, bg="yellow")
-    fra.place(x=10,y=10)
+    global fra
+    fra = tk.Frame(app)
+    fra.place(x=10, y=10)
+    global btn_1
     btn_1 = tk.Button(app, command=settings, text='Settings', width=7, height=1, relief=GROOVE)
     btn_1.place(x=238,y=3)
-
     app.mainloop()
 
 def settings():
-    lab = tk.Label(fra, text="HELLO")
+    lab = tk.Label(fra, text="Wybierz wygląd okna")
     lab.pack()
-    lab.grid(row="0", column="0")
+    var = IntVar()
+    R1 = Radiobutton(app, text="Option 1", variable=var, value=1)
+    R1.pack(anchor=W)
 
+    R2 = Radiobutton(app, text="Option 2", variable=var, value=2)
+    R2.pack(anchor=W)
 
+    R3 = Radiobutton(app, text="Option 3", variable=var, value=3)
+    R3.pack(anchor=W)
 
+    btn_1.config(state=DISABLED)
 
 window = tk.Tk()
 window.title('Login')

@@ -1,24 +1,22 @@
-from tkinter import *
+import tkinter as tk
 
 
-def sel():
-   selection = "You selected the option " + str(var.get())
-   label.config(text = selection)
+def default_bg_color(widget):
 
-root = Tk()
-var = IntVar()
-R1 = Radiobutton(root, text="Option 1", variable=var, value=1,
-                  command=sel)
-R1.pack( anchor = W )
+    _ = widget.__class__(widget.master)
+    widget['bg'] = _['bg']
+    _.destroy()
 
-R2 = Radiobutton(root, text="Option 2", variable=var, value=2,
-                  command=sel)
-R2.pack( anchor = W )
 
-R3 = Radiobutton(root, text="Option 3", variable=var, value=3,
-                  command=sel)
-R3.pack( anchor = W)
+if __name__ == '__main__':
 
-label = Label(root)
-label.pack()
-root.mainloop()
+    root = tk.Tk()
+
+    # tk.Label can be replaced with any widget that has bg option
+    label = tk.Label(root, text="This is the red label.", bg='red')
+    btn = tk.Button(root, text="Default color!")
+    btn['command'] = lambda widget=label: default_bg_color(widget)
+
+    label.pack()
+    btn.pack()
+    root.mainloop()
